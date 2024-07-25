@@ -1,5 +1,4 @@
 const express = require('express');
-const http = require('http');
 const socketIo = require('socket.io');
 const connectDB = require('../config/db');
 const productRoutes = require('../routes/productRoutes');
@@ -12,8 +11,6 @@ const logger = require('../utils/logger');
 require('dotenv').config();
 
 const app = express();
-const server = http.createServer(app);
-const io = socketIo(server);
 
 // Connect to MongoDB
 connectDB();
@@ -32,25 +29,13 @@ app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/weather', weatherRoutes);
 
-io.on('connection', (socket) => {
-  console.log('New client connected');
-  socket.on('disconnect', () => {
-    console.log('Client disconnected');
-  });
-  socket.on('newMessage', (message) => {
-    io.emit('messageReceived', message);
-  });
-});
-
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
 
 module.exports = (req, res) => {
   return new Promise((resolve, reject) => {
-    server.once('request', (req, res) => {
-      app(req, res);
-    });
-    server.listen(0, () => resolve());
+    app(req, res);
+    resolve();
   });
 };
