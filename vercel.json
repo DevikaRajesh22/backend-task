@@ -11,6 +11,11 @@
         "src": "/api/(.*)",
         "dest": "/server.js"
       }
-    ]
+    ],
+    "functions": {
+      "api/**/*.js": {
+        "maxDuration": 60
+      }
+    }
   }
   
