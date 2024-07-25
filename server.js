@@ -21,6 +21,12 @@ connectDB();
 // Middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  console.log('Request Body:', req.body);
+  next();
+});
+
 // Routes
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
@@ -45,3 +51,5 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+module.exports=app;
