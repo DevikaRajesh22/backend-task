@@ -57,7 +57,7 @@ exports.loginUser = async (req, res) => {
 };
 
 
-// Protected route example
+// Profile
 exports.getProfile = (req, res) => {
     res.status(200).json({ message: 'Access granted', user: req.user });
 };
