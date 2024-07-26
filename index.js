@@ -28,9 +28,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.get('/',(req,res)=>{
-  res.json({message:'Working properly'})
-})
+app.get('/', (req, res) => {
+  res.send('products api running new deploy');
+});
 
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
