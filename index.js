@@ -32,9 +32,9 @@ app.get('/', (req, res) => {
   res.send('products api running new deploy');
 });
 
-app.use('/api/products', productRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/weather', weatherRoutes);
+app.use('/products', productRoutes);
+app.use('/users', userRoutes);
+app.use('/weather', weatherRoutes);
 
 io.on('connection', (socket) => {
   console.log('New client connected');
