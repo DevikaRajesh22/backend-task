@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
 // Routes
 app.get('/',(req,res)=>{
-  res.send('Hello world')
+  res.json({message:'Working properly'})
 })
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
