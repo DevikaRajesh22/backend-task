@@ -28,6 +28,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.get('/',(req,res)=>{
+  console.log('Hello world')
+})
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/weather', weatherRoutes);
