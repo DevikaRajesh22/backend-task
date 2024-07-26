@@ -24,6 +24,7 @@ const registerUser = asyncHandler(async(req,res)=>{
         await user.save();
         res.status(201).json({ message: 'User registered' });
     } catch (error) {
+        console.error('Error occurred:', error);
         res.status(500).json({ message: 'Server error' });
     }
 });
