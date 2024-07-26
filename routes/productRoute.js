@@ -6,7 +6,7 @@ const { protect } = require('../middleware/auth');
 router.post('/', createProduct);
 router.get('/', getProducts);
 router.get('/:id', getProductById);
-router.put('/:id', protect, updateProduct);
-router.delete('/:id', protect, deleteProduct);
+router.put('/:id', updateProduct);
+router.delete('/:id', deleteProduct);
 
 module.exports = router;
