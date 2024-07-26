@@ -1,8 +1,9 @@
 const axios = require('axios');
 const NodeCache = require('node-cache');
 const weatherCache = new NodeCache({ stdTTL: 600 }); // Cache for 10 minutes
+const asyncHandler = require('express-async-handler');
 
-exports.getWeather = async (req, res) => {
+const getWeather = asyncHandler(async(req,res)=>{
   const cachedWeather = weatherCache.get('weatherData');
   if (cachedWeather) {
     return res.status(200).json(cachedWeather);
@@ -14,4 +15,6 @@ exports.getWeather = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
-}
+})
+
+module.exports={getWeather}

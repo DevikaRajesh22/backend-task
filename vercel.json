@@ -1,13 +1,27 @@
 {
     "version": 2,
     "builds": [
-      { "src": "api/*.js", "use": "@vercel/node" }
+        {
+            "src": "api/*.js",
+            "use": "@vercel/node"
+        }
     ],
     "routes": [
-      { "src": "/api/products", "dest": "/api/products.js" },
-      { "src": "/api/users", "dest": "/api/users.js" },
-      { "src": "/api/weather", "dest": "/api/weather.js" },
-      { "src": "/", "dest": "/" }
+        {
+            "src": "/api/products",
+            "dest": "/api/products.js"
+        },
+        {
+            "src": "/api/users",
+            "dest": "/api/users.js"
+        },
+        {
+            "src": "/api/weather",
+            "dest": "/api/weather.js"
+        },
+        {
+            "src": "/",
+            "dest": "/"
+        }
     ]
-  }
-  
+}

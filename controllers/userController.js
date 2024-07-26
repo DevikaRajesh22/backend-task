@@ -1,9 +1,10 @@
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler');
 require('dotenv').config();
 
 // Register a new user
-exports.registerUser = async (req, res) => {
+const registerUser = asyncHandler(async(req,res)=>{
     try {
         const { username, password } = req.body
         if (!username || !password) {
@@ -25,11 +26,11 @@ exports.registerUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
 
 
 // Login user and generate JWT
-exports.loginUser = async (req, res) => {
+const loginUser = asyncHandler(async(req,res)=>{
     try {
         const { username, password } = req.body;
         if (!username || !password) {
@@ -54,10 +55,12 @@ exports.loginUser = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
 
 
 // Profile
-exports.getProfile = (req, res) => {
+const getProfile = asyncHandler(async(req,res)=>{
     res.status(200).json({ message: 'Access granted', user: req.user });
-};
+});
+
+module.exports={registerUser, loginUser, getProfile}

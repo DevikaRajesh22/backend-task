@@ -1,46 +1,47 @@
 const Product = require('../models/product')
+const asyncHandler = require('express-async-handler');
 
 // Create a new product
-exports.createProduct = async (req, res) => {
+const createProduct = asyncHandler(async (req, res) => {
     try {
-      const { name, price, description, category } = req.body;
-      if (!name || !price || !description || !category) {
-        return res.status(400).json({ message: 'All fields are required' });
-      }
-      if (typeof name !== 'string' || name.trim().length < 3) {
-        return res.status(400).json({ message: 'Name must be a string with at least 3 characters' });
-      }
-      if (typeof price !== 'number' || price <= 0) {
-        return res.status(400).json({ message: 'Price must be a positive number' });
-      }
-      if (typeof description !== 'string' || description.trim().length < 10) {
-        return res.status(400).json({ message: 'Description must be a string with at least 10 characters' });
-      }
-      if (typeof category !== 'string' || category.trim().length < 3) {
-        return res.status(400).json({ message: 'Category must be a string with at least 3 characters' });
-      }
-      const product = new Product({ name, price, description, category });
-      await product.save();
-      res.status(201).json(product);
+        const { name, price, description, category } = req.body;
+        if (!name || !price || !description || !category) {
+            return res.status(400).json({ message: 'All fields are required' });
+        }
+        if (typeof name !== 'string' || name.trim().length < 3) {
+            return res.status(400).json({ message: 'Name must be a string with at least 3 characters' });
+        }
+        if (typeof price !== 'number' || price <= 0) {
+            return res.status(400).json({ message: 'Price must be a positive number' });
+        }
+        if (typeof description !== 'string' || description.trim().length < 10) {
+            return res.status(400).json({ message: 'Description must be a string with at least 10 characters' });
+        }
+        if (typeof category !== 'string' || category.trim().length < 3) {
+            return res.status(400).json({ message: 'Category must be a string with at least 3 characters' });
+        }
+        const product = new Product({ name, price, description, category });
+        await product.save();
+        res.status(201).json(product);
     } catch (error) {
-      console.error('Error creating product:', error);
-      res.status(500).json({ message: 'Server error' });
+        console.error('Error creating product:', error);
+        res.status(500).json({ message: 'Server error' });
     }
-  };
-  
+});
+
 
 // Retrieve all products
-exports.getProducts = async (req, res) => {
+const getProducts = asyncHandler(async (req, res) => {
     try {
         const products = await Product.find();
         res.status(200).json(products);
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
 
 // Retrieve a single product by ID
-exports.getProductById = async (req, res) => {
+const getProductById = asyncHandler(async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
@@ -50,10 +51,10 @@ exports.getProductById = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
 
 // Update a product by ID
-exports.updateProduct = async (req, res) => {
+const updateProduct = asyncHandler(async (req, res) => {
     try {
         const { name, price, description, category } = req.body;
         const product = await Product.findByIdAndUpdate(
@@ -68,10 +69,10 @@ exports.updateProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
 
 // Delete a product by ID
-exports.deleteProduct = async (req, res) => {
+const deleteProduct = asyncHandler(async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(req.params.id);
         if (!product) {
@@ -81,4 +82,6 @@ exports.deleteProduct = async (req, res) => {
     } catch (error) {
         res.status(500).json({ message: 'Server error' });
     }
-};
+});
+
+module.exports={createProduct, getProducts, getProductById, updateProduct, deleteProduct}
