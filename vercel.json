@@ -8,6 +8,18 @@
     ],
     "routes":[
         {
+            "src": "/products",
+            "dest": "index.js"
+          },
+          {
+            "src": "/users",
+            "dest": "index.js"
+          },
+          {
+            "src": "/weather",
+            "dest": "index.js"
+          },
+        {
             "src":"/(.*)",
             "dest":"index.js"
         }
