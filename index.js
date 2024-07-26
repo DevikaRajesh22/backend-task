@@ -2,9 +2,9 @@ const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
 const connectDB = require('./config/db');
-const productRoutes = require('./routes/productRoutes');
-const userRoutes = require('./routes/userRoutes');
-const weatherRoutes = require('./routes/weatherRoutes');
+const productRoutes = require('./routes/productRoute');
+const userRoutes = require('./routes/userRoute');
+const weatherRoutes = require('./routes/weatherRoute');
 const { notFound, errorHandler } = require('./middleware/errorHandler');
 const logger = require('./utils/logger');
 
