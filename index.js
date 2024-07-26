@@ -31,6 +31,7 @@ app.use((req, res, next) => {
 app.get('/',(req,res)=>{
   res.json({message:'Working properly'})
 })
+
 app.use('/api/products', productRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/weather', weatherRoutes);
