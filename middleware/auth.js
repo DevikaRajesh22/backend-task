@@ -7,8 +7,11 @@ exports.protect = async (req, res, next) => {
     let token;
     console.log(req.headers.authorization)
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        console.log('true')
         token = req.headers.authorization.split(' ')[1];
+        console.log('tok',token)
     }
+    console.log('tok',token)
     if (!token) {
         return res.status(401).json({ message: 'Not authorized' });
     }
